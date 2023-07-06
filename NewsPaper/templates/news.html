@@ -1,0 +1,24 @@
+{% extends 'flatpages/default.html' %}
+{% load custom_filter %}
+
+{% block title %}
+All News
+{% endblock title %}
+
+<!-- В контенте на странице мы выводим все товары -->
+{% block content %}
+    <h1>Все новости</h1>
+    <hr>
+    {% if news %}
+        <p>Количество новостей: {{news|length}}</p>
+
+
+        {% for new in news %}
+            <h2>{{new.title|Censor}}</h2>
+            <p>{{new.dateCreation|date:'d-M-Y H:i'}}</p>
+            <p>{{new.text|truncatewords:50|Censor}}</p>
+        {% endfor %}
+    {% else %} <!-- Если товаров нет, то говорим что товаров нет ;) -->
+        <h2>Товаров нет!</h2>
+    {% endif %}
+{% endblock content %}
